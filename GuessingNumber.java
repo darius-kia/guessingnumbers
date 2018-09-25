@@ -1,16 +1,16 @@
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+
 public class GuessingNumber {
 
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
+        // Scanner reader = new Scanner(System.in);
         int max = 10;
         while (true) {
-            System.out.print("Type \"start\" to begin a new game or \"limit\" to change the limit: ");
-            String response = reader.nextLine();
+            String response = JOptionPane.showInputDialog("Type \"start\" to begin a new game or \"limit\" to change the limit: ", "");
             if (response.equals("limit")) {
-                System.out.print("Enter a new limit: ");
-                max = Integer.parseInt(reader.nextLine());
-                System.out.println("");
+                max = Integer.parseInt(JOptionPane.showInputDialog("Enter a new limit: ", ""));
             } else if (response.equals("start")) {
                 guessingGame(max);
             }
@@ -18,26 +18,25 @@ public class GuessingNumber {
     }
 
     public static void guessingGame(int max) {
-        Scanner reader = new Scanner(System.in);
+        // Scanner reader = new Scanner(System.in);
         Random random = new Random();
         int count, ran = random.nextInt(max) + 1;
         boolean win = false;
+        int guess = Integer.parseInt(JOptionPane.showInputDialog("Guess a number from 1-" + max + ": ", ""));
         for (count = 1; count < 11; count++) {
-            System.out.print("Guess a number from 1-" + max + ": ");
-            int guess = Integer.parseInt(reader.nextLine());
             if (guess > ran) {
-                System.out.println("The number is lower...\nTries: " + count + "\n");
+              guess = Integer.parseInt(JOptionPane.showInputDialog("The number is lower...\nTries: " + count + "\n"));
             } else if (guess < ran) {
-                System.out.println("The number is higher...\nTries: " + count + "\n");
+              guess = Integer.parseInt(JOptionPane.showInputDialog("The number is higher...\nTries: " + count + "\n"));
             } else {
                 win = true;
                 break;
             }
         }
         if (win) {
-            System.out.println("Congratulations, you guessed the number in " + count + " guesses!\n");
+            JOptionPane.showMessageDialog(null, "Congratulations, you guessed the number in " + count + " guesses!\n");
         } else {
-            System.out.println("The number was: " + ran + "\n");
+            JOptionPane.showMessageDialog(null, "The number was: " + ran + "\n");
         }
     }
 }
